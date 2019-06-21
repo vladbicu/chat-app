@@ -36,8 +36,6 @@ const autoscroll = () => {
   if (totalHeight - newMessageHeight <= scrollOffset) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
-
-  console.log(newMessageHeight);
 };
 
 // listen on "message" event and populate the template
