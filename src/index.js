@@ -2,7 +2,6 @@ const express = require("express");
 const http = require("http");
 const path = require("path");
 const socketio = require("socket.io");
-const Filter = require("bad-words");
 const { generateMessage, generateLocationUrl } = require("./utils/messages");
 const {
   addUser,
@@ -24,8 +23,6 @@ app.use(express.static(publicDirectoryPath));
 
 // socket.io
 io.on("connection", socket => {
-  console.log("New WS connection");
-
   // react when join event is emitted
   socket.on("join", ({ username, room }, callback) => {
     const { error, user } = addUser({ id: socket.id, username, room });
@@ -51,11 +48,6 @@ io.on("connection", socket => {
 
   // react when a sendMessage event is emitted
   socket.on("sendMessage", (message, callback) => {
-    const filter = new Filter();
-
-    if (filter.isProfane(message)) {
-      return callback("Profanity is not allowed");
-    }
     // get the user info w/ socket.id and send message to current room
     const user = getUser(socket.id);
     // emit a message event with newly sent message object as data

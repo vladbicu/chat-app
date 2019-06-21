@@ -185,3 +185,14 @@ button:disabled {
   font-weight: 300;
   padding: 12px 24px 0 24px;
 }
+
+@media screen and (max-width: 767px) {
+  .compose {
+    padding: 8px;
+    flex-direction: column;
+  }
+
+  .compose form {
+    margin: 0 0 8px 0;
+  }
+}
